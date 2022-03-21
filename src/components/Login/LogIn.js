@@ -2,8 +2,15 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Api } from "../../Api";
+import { Navigate, useNavigate } from "react-router";
 
-const LoginPage = (props) => {
+const LoginPage = (props, response) => {
+  let navigate = useNavigate();
+
+  // const navigating = () => {
+  //   navigate("/dashboard");
+  // };
+
   const loginPageStyle = {
     margin: "100px auto 37px",
     maxWidth: "530px",
@@ -57,7 +64,10 @@ const LoginPage = (props) => {
               className="d-flex justify-content-center"
               style={{ margin: "5px" }}
             >
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+              >
                 Login
               </button>
             </div>
@@ -79,16 +89,27 @@ const LoginFormik = withFormik({
     email: Yup.string().email("Email not valid").required("Email is required"),
     password: Yup.string().required("Password is required"),
   }),
-  handleSubmit: async (values) => {
-    const response = await Api("auth/login","POST", values);
+  handleSubmit: async (values, props) => {
+    const response = await Api("auth/login", "POST", values);
 
     console.log(response);
+    console.log(props);
 
-    if(!response.success){
-        alert(response.message)
+    if (response.success) {
+      // alert(response.message);
+      // let navigate = useNavigate();
+      // const navigating = () => {
+      //   navigate("/dashboard");
+      // };
+      // const d = -addData(values);
+      // props.navigation.navigate("/dashboard");
+    } else {
+      alert(response.message);
     }
 
+    // response.success ? navigate("/dashboard") : alert("error")
   },
+  onClick: () => {},
 })(LoginPage);
 
 export default LoginFormik;
