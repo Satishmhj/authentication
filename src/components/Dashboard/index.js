@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 import "../Dashboard/index.css";
 
 const Dashboard = () => {
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
   return (
     <>
       <div class="sidebar">
@@ -24,6 +33,21 @@ const Dashboard = () => {
           <a href="">Create User</a>
           <a href="">Role Setting</a>
           <a href="">Screen Setup</a>
+        </div>
+        <div
+          className="d-flex justify-content-center"
+          style={{ marginTop: "150px" }}
+        >
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              localStorage.removeItem("token");
+
+              navigate("/");
+            }}
+          >
+            Log Out
+          </button>
         </div>
       </div>
 

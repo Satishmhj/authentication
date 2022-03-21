@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { Api } from "../../Api";
 import { useNavigate } from "react-router";
@@ -14,6 +14,13 @@ const loginPageStyle = {
 
 const Basic = () => {
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, []);
   return (
     <>
       <div>
@@ -35,7 +42,8 @@ const Basic = () => {
             setSubmitting(false);
             console.log(response);
 
-            if (response.success) {
+            if (response?.success && response.data?.token) {
+              localStorage.setItem("token", response.data.token);
               navigate("/dashboard");
             } else {
               alert(response.message);
