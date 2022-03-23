@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet, Route, Routes, useNavigate } from "react-router";
 import Navigation from "./Navigation";
-import UserForm from "./User/UserForm";
-import UserList from "./User/UserList";
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -18,7 +16,7 @@ const Dashboard = () => {
     <>
       <Navigation />
       <div class="content">
-        <div className="d-flex justify-content-center display-4 mt-3">
+        <div >
           <Outlet/>
         </div>
       </div>

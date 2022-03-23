@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import "../Dashboard/index.css";
 
 const Navigation = () => {
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const token  = localStorage.getItem("token")
+    if(!token){
+      navigate("/")
+    }
+  }, []);
+
   return (
     <>
       <div class="sidebar">
@@ -18,7 +26,6 @@ const Navigation = () => {
             }}
           />
         </div>
-
         <div className="m-4">
           <div className="btn btn-lg btn-primary d-flex justify-content-center ">
             Home
@@ -102,7 +109,7 @@ const Navigation = () => {
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
                 <a
-                  class="dropdown-item bg-danger"
+                  class="dropdown-item "
                   onClick={() => {
                     navigate("/dashboard/screen/create");
                   }}

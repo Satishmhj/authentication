@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const CreateRole = () => {
   return (
-    <h1>CreateRole</h1>
-  )
-}
+    <>
+      <h1>CreateRole</h1>
+    </>
+  );
+};
 
-export default CreateRole
+export default CreateRole;
