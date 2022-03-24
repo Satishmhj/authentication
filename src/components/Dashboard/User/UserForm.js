@@ -1,8 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import * as yup from "yup";
-import { createUser } from "../../Redux/Action/UserApiAction";
+import { createUser, userApi } from "../../Redux/Action/UserApiAction";
 
 const userFormValidation = yup.object().shape({
   email: yup
@@ -18,6 +19,7 @@ const userFormValidation = yup.object().shape({
 
 const UserForm = () => {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   return (
     <>
       <div className="container">
@@ -28,8 +30,9 @@ const UserForm = () => {
               validationSchema={userFormValidation}
               onSubmit={(values) => {
                 console.log(values);
-                alert("User is Created");
                 dispatch(createUser(values));
+                navigate("/dashboard/user/list");
+                dispatch(userApi());
               }}
             >
               {({ touched, errors, isSubmitting, values }) => (
