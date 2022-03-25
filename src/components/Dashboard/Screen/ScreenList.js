@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { screenApi } from "../../Redux/Action/ScreenApiAction";
+import { deleteScreen, screenApi } from "../../Redux/Action/ScreenApiAction";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import ScreenEditModal from "./ScreenEditModal";
 
 const ScreenList = () => {
-  const dispatch = useDispatch();
+  const [screenModal, setScreenModal] = useState(false);
+  const [data, setData] = useState("");
 
   const screens = useSelector((state) => state.screen.screens);
 
+  const dispatch = useDispatch();
   console.log(screens);
 
   useEffect(() => {
@@ -17,6 +20,13 @@ const ScreenList = () => {
 
   return (
     <>
+      {screenModal && (
+        <ScreenEditModal
+          setScreenModal={setScreenModal}
+          screenModal={screenModal}
+          data ={data}
+        />
+      )}
       <table class="table">
         <thead>
           <tr>
@@ -27,7 +37,7 @@ const ScreenList = () => {
           </tr>
         </thead>
         <tbody>
-          {screens.map((item) => {
+          {screens?.map((item) => {
             const { createdAt, description, id, name, updateAt } = item;
 
             return (
@@ -43,14 +53,19 @@ const ScreenList = () => {
                       //   setEdit(true);
                       //   setPass(item)
                       // }}
+                      onClick={() => {
+                        setScreenModal(true);
+                        setData(item);
+                      }}
                     ></i>
                     <i
                       class="bi bi-trash"
-                      // onClick={() => {
-                      //   dispatch(deleteUser(id));
-                      //   console.log(id);
-                      //   // console.log("trash");
-                      // }}
+                      onClick={() => {
+                        dispatch(deleteScreen(id));
+                        setTimeout(() => {
+                          dispatch(screenApi());
+                        }, 2000);
+                      }}
                     ></i>
                   </div>
                 </td>

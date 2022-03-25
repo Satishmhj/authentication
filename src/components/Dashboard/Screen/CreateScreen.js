@@ -1,10 +1,17 @@
 import { Formik } from "formik";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { screenCreate } from "../../Redux/Action/ScreenApiAction";
+import { screenApi, screenCreate } from "../../Redux/Action/ScreenApiAction";
+import { useNavigate } from "react-router";
 
 const CreateScreen = () => {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  const navigating = () =>{
+    navigate("dashboard/screen/list")
+  }
+
   return (
     <>
       <Formik
@@ -17,8 +24,11 @@ const CreateScreen = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          
-          // dispatch(screenCreate(values));
+          console.log(values);
+
+          dispatch(screenCreate(values));
+          navigating()
+          dispatch(screenApi());
         }}
       >
         {({
@@ -61,10 +71,7 @@ const CreateScreen = () => {
               {errors.description && touched.description && errors.description}
             </div>
             <div className="d-flex justify-content-center">
-              <button
-                type="submit"
-                className="btn btn-primary mt-3"
-              >
+              <button type="submit" className="btn btn-primary mt-3">
                 Submit
               </button>
             </div>
