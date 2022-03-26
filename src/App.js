@@ -8,6 +8,8 @@ import ScreenList from "./components/Dashboard/Screen/ScreenList";
 import UserForm from "./components/Dashboard/User/UserForm";
 import UserList from "./components/Dashboard/User/UserList";
 import LoginForm from "./components/Login/LoginForm";
+import AddProducts from "./components/Products/AddProducts";
+import Products from "./components/Products/Products";
 
 function App() {
   return (
@@ -15,6 +17,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginForm />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/addProducts" element={<AddProducts />} />
+          {/* <Route path="addProduct" element={<AddProducts />} />
+          </Route> */}
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="user/create" index element={<UserForm />}></Route>
             <Route path="user/list" element={<UserList />}></Route>
