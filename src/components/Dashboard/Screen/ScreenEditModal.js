@@ -5,10 +5,10 @@ import { useNavigate } from "react-router";
 import { updateScreen } from "../../Redux/Action/ScreenApiAction";
 
 const ScreenEditModal = (props) => {
-  const { setScreenModal, screenModal, data } = props;
+  const { setScreenModal, data } = props;
 
   let dispatch = useDispatch();
-  let navigate =useNavigate()
+  let navigate = useNavigate();
 
   return (
     <div>
@@ -63,7 +63,6 @@ const ScreenEditModal = (props) => {
                     dispatch(updateScreen(data.id, values));
                     setScreenModal(false);
                     // alert("submitted");
-                    
                   }}
                 >
                   {({

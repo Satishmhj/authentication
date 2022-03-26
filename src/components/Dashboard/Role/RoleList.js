@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roleApi, roleDelete } from "../../Redux/Action/RoleApiAction";
+import Privilege from "./Privilege";
 import RoleEditModal from "./RoleEditModal";
 
 const RoleList = () => {
   const [roleEdit, setRoleEdit] = useState(false);
   const [roledata, setRoledata] = useState("");
+  const [privilege, setPrivilege] = useState(false);
 
   let dispatch = useDispatch();
 
@@ -23,6 +25,7 @@ const RoleList = () => {
           roledata={roledata}
         />
       )}
+      {privilege && <Privilege setPrivilege={setPrivilege} />}
 
       <table class="table">
         <thead>
@@ -60,7 +63,12 @@ const RoleList = () => {
                         }, 2000);
                       }}
                     ></i>
-                    <i class="bi bi-gear-fill"></i>
+                    <i
+                      class="bi bi-gear-fill"
+                      onClick={() => {
+                        setPrivilege(true);
+                      }}
+                    ></i>
                   </div>
                 </td>
               </tr>
