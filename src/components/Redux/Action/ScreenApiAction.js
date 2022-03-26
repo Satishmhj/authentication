@@ -1,5 +1,5 @@
 import { Api } from "../../../Api";
-import { DELETE_SCREEN, SCREEN_API } from "../Constant";
+import { DELETE_SCREEN, SCREEN_API, UPDATE_SCREEN } from "../Constant";
 
 export const screenApi = () => async (dispatch) => {
   let res = await Api("screens", "GET", null);
@@ -32,5 +32,17 @@ export const deleteScreen = (id) => async (dispatch) => {
   dispatch({
     type: DELETE_SCREEN,
     // payload: res.data,
+  });
+};
+export const updateScreen = (id, data) => async (dispatch) => {
+  let res = await Api(`screens/${id}`, "PUT", data);
+
+  if (!res.success) {
+    alert(res.message);
+  } else {
+    dispatch(screenApi());
+  }
+  dispatch({
+    type: UPDATE_SCREEN,
   });
 };

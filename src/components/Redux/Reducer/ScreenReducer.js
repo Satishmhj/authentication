@@ -1,4 +1,9 @@
-import { CREATE_SCREEN, DELETE_SCREEN, SCREEN_API } from "../Constant";
+import {
+  CREATE_SCREEN,
+  DELETE_SCREEN,
+  SCREEN_API,
+  UPDATE_SCREEN,
+} from "../Constant";
 
 const INITIAL_STATE = {
   screens: [],
@@ -17,6 +22,11 @@ const fetchScreenApiReducer = (state = INITIAL_STATE, action) => {
         // screens: action.payload,
       };
     case DELETE_SCREEN:
+      return {
+        ...state,
+        // screens: action.payload,
+      };
+    case UPDATE_SCREEN:
       return {
         ...state,
         // screens: action.payload,

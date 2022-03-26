@@ -1,8 +1,15 @@
 import { Formik } from "formik";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { updateScreen } from "../../Redux/Action/ScreenApiAction";
 
 const ScreenEditModal = (props) => {
   const { setScreenModal, screenModal, data } = props;
+
+  let dispatch = useDispatch();
+  let navigate =useNavigate()
+
   return (
     <div>
       <div
@@ -53,9 +60,10 @@ const ScreenEditModal = (props) => {
                     return errors;
                   }}
                   onSubmit={(values, { setSubmitting }) => {
-                    // dispatch(updateUser(pass.id, values));
-                    // setEdit(false);
-                    alert("submitted", values)
+                    dispatch(updateScreen(data.id, values));
+                    setScreenModal(false);
+                    // alert("submitted");
+                    
                   }}
                 >
                   {({
