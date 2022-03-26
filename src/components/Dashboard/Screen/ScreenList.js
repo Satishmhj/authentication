@@ -24,7 +24,7 @@ const ScreenList = () => {
         <ScreenEditModal
           setScreenModal={setScreenModal}
           screenModal={screenModal}
-          data ={data}
+          data={data}
         />
       )}
       <table class="table">
@@ -49,10 +49,6 @@ const ScreenList = () => {
                   <div className="d-flex justify-content-evenly">
                     <i
                       class="bi bi-pencil-square"
-                      // onClick={() => {
-                      //   setEdit(true);
-                      //   setPass(item)
-                      // }}
                       onClick={() => {
                         setScreenModal(true);
                         setData(item);

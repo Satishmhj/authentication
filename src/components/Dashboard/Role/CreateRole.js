@@ -1,7 +1,12 @@
 import { Formik } from "formik";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { roleCreate } from "../../Redux/Action/RoleApiAction";
 
 const CreateRole = () => {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
   return (
     <>
       <Formik
@@ -16,9 +21,9 @@ const CreateRole = () => {
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
 
-          // dispatch(screenCreate(values));
-          // navigating();
-          // dispatch(screenApi());
+          dispatch(roleCreate(values));
+
+          navigate("/dashboard/role/list");
         }}
       >
         {({

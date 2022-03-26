@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { roleApi } from "../../Redux/Action/RoleApiAction";
+import { roleApi, roleDelete } from "../../Redux/Action/RoleApiAction";
+import RoleEditModal from "./RoleEditModal";
 
 const RoleList = () => {
+  const [roleEdit, setRoleEdit] = useState(false);
+  const [roledata, setRoledata] = useState("");
+
   let dispatch = useDispatch();
 
   const roles = useSelector((state) => state.role.roles);
@@ -12,13 +16,14 @@ const RoleList = () => {
   }, []);
   return (
     <>
-      {/* {screenModal && (
-        <ScreenEditModal
-          setScreenModal={setScreenModal}
-          screenModal={screenModal}
-          data={data}
+      {roleEdit && (
+        <RoleEditModal
+          roleEdit={roleEdit}
+          setRoleEdit={setRoleEdit}
+          roledata={roledata}
         />
-      )} */}
+      )}
+
       <table class="table">
         <thead>
           <tr>
@@ -41,19 +46,19 @@ const RoleList = () => {
                   <div className="d-flex justify-content-evenly">
                     <i
                       class="bi bi-pencil-square"
-                      // onClick={() => {
-                      //   setScreenModal(true);
-                      //   setData(item);
-                      // }}
+                      onClick={() => {
+                        setRoleEdit(true);
+                        setRoledata(item);
+                      }}
                     ></i>
                     <i
                       class="bi bi-trash"
-                      // onClick={() => {
-                      //   dispatch(deleteScreen(id));
-                      //   setTimeout(() => {
-                      //     dispatch(screenApi());
-                      //   }, 2000);
-                      // }}
+                      onClick={() => {
+                        dispatch(roleDelete(id));
+                        setTimeout(() => {
+                          dispatch(roleApi());
+                        }, 2000);
+                      }}
                     ></i>
                     <i class="bi bi-gear-fill"></i>
                   </div>
