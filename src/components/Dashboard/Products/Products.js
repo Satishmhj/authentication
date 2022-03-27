@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { fetchProducts, products } from "../Redux/Action/ProductAction";
+import { fetchProducts, products } from "../../Redux/Action/ProductAction";
 
 const Products = () => {
   const products = useSelector((state) => state.products.products);
@@ -19,16 +19,6 @@ const Products = () => {
       <div className="container">
         <div className="display-4 d-flex justify-content-center mt-3">
           Products
-        </div>
-        <div className="d-flex justify-content-end">
-          <button
-            onClick={() => {
-              navigate("/products/addProducts");
-            }}
-            className="btn btn-primary "
-          >
-            Add Products
-          </button>
         </div>
         <div className="row">
           {products?.map((items) => {

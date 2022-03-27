@@ -6,9 +6,9 @@ const Navigation = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    const token  = localStorage.getItem("token")
-    if(!token){
-      navigate("/")
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
     }
   }, []);
 
@@ -125,6 +125,39 @@ const Navigation = () => {
                   }}
                 >
                   Screen List
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown d-flex justify-content-center mt-2 ">
+            <button
+              class="btn btn-lg btn-primary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Products
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li>
+                <a
+                  class="dropdown-item "
+                  onClick={() => {
+                    navigate("/dashboard/products/add");
+                  }}
+                >
+                  Add Products
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  onClick={() => {
+                    navigate("/dashboard/products/list");
+                  }}
+                >
+                  products list
                 </a>
               </li>
             </ul>

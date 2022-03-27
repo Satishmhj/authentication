@@ -1,13 +1,18 @@
-// Render Prop
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
-import { createProducts } from "../Redux/Action/ProductAction";
+import { createProducts } from "../../Redux/Action/ProductAction";
 import { useNavigate } from "react-router";
 
 const AddProducts = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div>
@@ -38,7 +43,7 @@ const AddProducts = () => {
 
           dispatch(createProducts(values));
 
-          navigate("/products");
+          navigate("/dashboard/products/list");
         }}
       >
         {({ isSubmitting }) => (
@@ -47,22 +52,22 @@ const AddProducts = () => {
               <b>Name: </b>
               <Field type="text" name="name" />
             </div>
-            <br/>
+            <br />
             <div className="d-flex justify-content-center">
               <b>Description:</b>
               <Field type="text" name="description" />
             </div>
-            <br/>
+            <br />
             <div className="d-flex justify-content-center">
               <b>ImageUrl:</b>
               <Field type="url" name="image" />
             </div>
-            <br/>
+            <br />
             <div className="d-flex justify-content-center">
               <b>Quantity:</b>
               <Field type="number" name="quantity" />
             </div>
-            <br/>
+            <br />
             <div className="d-flex justify-content-center">
               <button
                 type="submit"
