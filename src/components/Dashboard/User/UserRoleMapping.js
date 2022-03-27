@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactSelect from "react-select";
 import { Api } from "../../../Api";
@@ -6,6 +6,8 @@ import { roleApi } from "../../Redux/Action/RoleApiAction";
 import { userApi } from "../../Redux/Action/UserApiAction";
 
 const UserRoleMapping = () => {
+  const [userID, setUserID] = useState();
+  const [roleId, setRoleId] = useState();
   const userList = useSelector((state) => state.user.userList);
   console.log(userList.id);
 
@@ -19,6 +21,16 @@ const UserRoleMapping = () => {
     dispatch(roleApi());
   }, []);
 
+  const handleChangeUser = (options) => {
+    setUserID(options.value);
+    console.log(options.value);
+  };
+
+  const handleChangeRole = (options) => {
+    setRoleId(options.value);
+  };
+
+  console.log(roleId);
   return (
     <>
       <div className="d-flex justify-content-center">
@@ -31,10 +43,11 @@ const UserRoleMapping = () => {
           <ReactSelect
             options={userList?.map((items) => {
               return {
-                value: items.name,
+                value: items.id,
                 label: items.name,
               };
             })}
+            onChange={handleChangeUser}
           />
         </div>
         <div className="text-center">
@@ -42,10 +55,11 @@ const UserRoleMapping = () => {
           <ReactSelect
             options={roles?.map((items) => {
               return {
-                value: items.name,
+                value: items.id,
                 label: items.name,
               };
             })}
+            onChange={handleChangeRole}
           />
         </div>
       </div>
@@ -54,8 +68,8 @@ const UserRoleMapping = () => {
           className="btn btn-danger mt-5 "
           onClick={async () => {
             let res = await Api("user/role/map", "POST", {
-              userId: "",
-              roleId: "",
+              userId: userID,
+              roleId: roleId,
             });
           }}
         >
