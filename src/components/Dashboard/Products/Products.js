@@ -36,7 +36,8 @@ const Products = () => {
                 <div class="card">
                   <img
                     class="card-img-top"
-                    src={`https://ecom-react-task.herokuapp.com/${image}`}
+                    // src={`https://betanews.com/wp-content/uploads/2014/11/${image}`}
+                    src={`https://betanews.com/wp-content/uploads/2014/11/front.jpg`}
                     alt="Card image cap"
                   />
                   <div className="card-body">

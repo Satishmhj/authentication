@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { roleApi, roleDelete } from "../../Redux/Action/RoleApiAction";
 import Privilege from "./Privilege";
 import RoleEditModal from "./RoleEditModal";
@@ -8,10 +9,13 @@ const RoleList = () => {
   const [roleEdit, setRoleEdit] = useState(false);
   const [roledata, setRoledata] = useState("");
   const [privilege, setPrivilege] = useState(false);
+  const [roleId, setRoleId] = useState();
 
   let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const roles = useSelector((state) => state.role.roles);
+  // console.log(roleId);
 
   useEffect(() => {
     dispatch(roleApi());
@@ -25,7 +29,7 @@ const RoleList = () => {
           roledata={roledata}
         />
       )}
-      {privilege && <Privilege setPrivilege={setPrivilege} />}
+      {/* {privilege && <Privilege setPrivilege={setPrivilege} roleId={roleId} />} */}
 
       <table class="table">
         <thead>
@@ -66,7 +70,10 @@ const RoleList = () => {
                     <i
                       class="bi bi-gear-fill"
                       onClick={() => {
-                        setPrivilege(true);
+                        setRoleId(id);
+                        navigate("/dashboard/role/privilege", {
+                          state: { id },
+                        });
                       }}
                     ></i>
                   </div>

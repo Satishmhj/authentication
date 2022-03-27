@@ -61,6 +61,16 @@ const Navigation = () => {
                   UserList
                 </a>
               </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  onClick={() => {
+                    navigate("/dashboard/user/userRoleMapping");
+                  }}
+                >
+                  userRoleMapping
+                </a>
+              </li>
             </ul>
           </div>
           <div class="dropdown d-flex justify-content-center mt-2 ">
