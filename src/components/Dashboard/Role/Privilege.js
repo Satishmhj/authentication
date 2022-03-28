@@ -6,7 +6,7 @@ import { Api } from "../../../Api";
 import { screenApi } from "../../Redux/Action/ScreenApiAction";
 
 const Privilege = (props) => {
-  const { setPrivilege, } = props;
+  const { setPrivilege } = props;
   // console.log(roleId);
 
   const location = useLocation();
@@ -80,12 +80,15 @@ const Privilege = (props) => {
         <div class="modal-dialog-lg mt-5 pl-4">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Privilege SetUp
-              </h5>
+              <div class="modal-title " id="exampleModalLabel">
+                <div className="d-flex justify-content-center">
+                  <b className="text-success display-5">Privilege SetUp</b>
+                </div>
+              </div>
             </div>
             <div className="d-flex justify-content-around m-2">
               <div>
+                <b className="text-danger">Screen List</b>
                 <ReactSelect
                   options={screens?.map((items) => {
                     return {
@@ -98,6 +101,7 @@ const Privilege = (props) => {
               </div>
               <div></div>
               <div>
+                <b className="text-danger">CRUD operation</b>
                 {
                   <ReactSelect
                     options={options}
@@ -146,7 +150,7 @@ const Privilege = (props) => {
         </tbody>
       </table>
 
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mt-5">
         <button
           className="btn btn-primary btn-lg"
           onClick={async () => {
